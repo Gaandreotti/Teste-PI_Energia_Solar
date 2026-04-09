@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Cliente, Orcamento
 from .forms import ClienteForm
@@ -7,6 +8,7 @@ from .forms import ClienteForm
 def calculadora(request):
     return render(request, 'solar/index.html')
 
+@csrf_exempt
 def calcular(request):
     if request.method != 'POST':
         return JsonResponse({'erro': 'Método não permitido'}, status=405)
